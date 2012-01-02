@@ -30,9 +30,13 @@
     _faceView = faceView;
     NSLog(@"setFaceView was called");
     NSLog(@"\n");
-
-    [self.faceView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.faceView action:@selector(pinch:)]];
+    
+    UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self.faceView action:@selector(pinch:)];
+    
+    [self.faceView addGestureRecognizer:pinchRecognizer];
+    NSLog(@"added UIPinchGestureRecognizer");
 }
+
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {

@@ -16,21 +16,23 @@
 {
     if (!_scale)
     {
+        NSLog(@"Default value is getting set  %f", _scale);
         return DEFAULT_SCALE;
     }
     else
     {
+        NSLog(@"getter was called %f ", _scale);
         return _scale;
+        
     }
 }
 
 - (void) setScale:(CGFloat)scale
 {
-    if (scale != scale)
-    {
-        _scale = scale;
-        [self setNeedsDisplay];
-    }
+    _scale = scale;
+    NSLog(@"setter was called %f ", _scale);
+    [self setNeedsDisplay];
+    
 }
 
 - (void) pinch:(UIPinchGestureRecognizer *) gesture
@@ -39,15 +41,16 @@
     NSLog(@"\n");
     if ((gesture.state == UIGestureRecognizerStateChanged) || 
         (gesture.state == UIGestureRecognizerStateEnded))
-         {
-             NSLog(@"pinch was called");
-             NSLog(@"\n");
-             NSLog(@"%@", gesture.scale);
-                   
-             self.scale *= gesture.scale;
-             gesture.scale = 1;
-         }
-         
+    {
+        NSLog(@"pinch was called");
+        NSLog(@"\n");
+        NSLog(@"Value of gesture.scale : %f", gesture.scale);
+        
+        
+        [self setScale:self.scale * gesture.scale];
+        gesture.scale = 1; 
+    }
+    
 }
 - (void) setup
 {
@@ -161,7 +164,7 @@
     CGPoint mouthCP2 = mouthEnd;
     mouthCP2.x -= MOUTH_H * size * 2/3;
     
-    float smile = 0;
+    float smile = 1.0;
     
     CGFloat smileOffset = MOUTH_SMILE * size * smile;
     mouthCP1.y += smileOffset;
