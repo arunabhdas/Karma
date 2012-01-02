@@ -8,6 +8,47 @@
 
 @implementation FaceView
 
+@synthesize scale = _scale;
+
+#define DEFAULT_SCALE 0.90
+
+- (CGFloat) scale
+{
+    if (!_scale)
+    {
+        return DEFAULT_SCALE;
+    }
+    else
+    {
+        return _scale;
+    }
+}
+
+- (void) setScale:(CGFloat)scale
+{
+    if (scale != scale)
+    {
+        _scale = scale;
+        [self setNeedsDisplay];
+    }
+}
+
+- (void) pinch:(UIPinchGestureRecognizer *) gesture
+{
+    NSLog(@"pinch was called");
+    NSLog(@"\n");
+    if ((gesture.state == UIGestureRecognizerStateChanged) || 
+        (gesture.state == UIGestureRecognizerStateEnded))
+         {
+             NSLog(@"pinch was called");
+             NSLog(@"\n");
+             NSLog(@"%@", gesture.scale);
+                   
+             self.scale *= gesture.scale;
+             gesture.scale = 1;
+         }
+         
+}
 - (void) setup
 {
     self.contentMode = UIViewContentModeRedraw;;
@@ -46,7 +87,7 @@
     UIGraphicsPopContext();
 }
 // make the size not be right out to the edges
-#define DEFAULT_SCALE 0.90
+
 
 - (void)drawRect:(CGRect)rect
 {
@@ -70,13 +111,16 @@
     if (self.bounds.size.height < self.bounds.size.width) size = self.bounds.size.height/2;
     
     // scale the size so that it doesn't go all the way to the edge
-    size *= DEFAULT_SCALE;
+    NSString *scalevalue = [NSString stringWithFormat:@"%f scalevalue ", self.scale];
+    
+    NSLog(@"%@", scalevalue);
+    size *= self.scale;
     
     // set the line width
     CGContextSetLineWidth(context, 5.0);
     
     // create the color
-    UIColor *mycolor= [UIColor colorWithRed:100.0/255.0 green:101.0/255.0 blue:102.0/255.0 alpha:1.0];
+    UIColor *mycolor= [UIColor colorWithRed:100.0/255.0 green:201.0/255.0 blue:102.0/255.0 alpha:1.0];
     
     // set the color
     [mycolor setStroke];

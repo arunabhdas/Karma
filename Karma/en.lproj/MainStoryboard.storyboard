@@ -22,7 +22,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="faceView" destination="bM3-4d-CDc" id="bVN-D0-rqk"/>
+                        <outlet property="faceView" destination="bM3-4d-CDc" id="aNQ-eO-yZv"/>
                     </connections>
                 </viewController>
             </objects>

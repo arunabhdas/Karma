@@ -15,16 +15,24 @@
 
 @implementation KarmaViewController : UIViewController
 
-@synthesize karma = _karma;
+@synthesize karmaness = _karmaness;
 @synthesize faceView = _faceView;
 
--(void) setKarma : (int) karma
+-(void) setKarmaness : (int) karmaness
 {
-    _karma = karma;
+    _karmaness = karmaness;
     // never call drawRect directly
     [self.faceView setNeedsDisplay];
 }
 
+- (void) setFaceView:(FaceView *)faceView
+{
+    _faceView = faceView;
+    NSLog(@"setFaceView was called");
+    NSLog(@"\n");
+
+    [self.faceView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.faceView action:@selector(pinch:)]];
+}
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
